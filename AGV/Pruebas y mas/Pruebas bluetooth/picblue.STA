@@ -1,0 +1,46 @@
+
+ROM used: 384 (1%)
+          384 (1%) including unused fragments
+
+          1 Average locations per line
+          12 Average locations per statement
+
+RAM used: 26 (2%) at main() level
+          27 (2%) worst case
+
+Stack used: 2 worst case (out of 31 total available)
+
+Lines Stmts  %   Files
+----- ----- ---  -----
+   77    31 100  picblue.c
+  359     0   0  ..\..\..\..\..\Program Files\PICC\devices\18F452.h
+----- -----
+  436    31 Total
+
+Page ROM  %  RAM   Vol Diff  Functions:
+---- --- --- ---   --- ----  ----------
+0     40   5   1             @delay_ms1
+0     14   2   0    24  1.5  RDA_isr
+0    160  21   0   708  3.9  MAIN
+
+Program metrics:
+    Functions               2
+    Statements              31
+    Comments                83
+    Volume (V)              780
+    Difficilty (D)          5.6
+    Effort to implement (E) 4373
+    Time to implement (T)   4 minutes
+    Est Delivered Bugs (B)  0
+    Cyclomatic Complexity   3
+    Maintainability (MI)    69
+
+ Segment     Used  Free
+-----------  ----  ----
+00000-00002     4  0  
+00004-00006     0  4  
+00008-000AC   166  0  
+000AE-07FFE   214  32380  
+
+
+

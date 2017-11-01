@@ -1,0 +1,24 @@
+[PROJECT]
+Target=C:\Documents and Settings\Sabas\Escritorio\AVG2011\pruebas.hex
+Development_Mode=
+Processor_Text=PIC18F4550
+ToolSuite=CCS
+[C:\Documents and Settings\Sabas\Escritorio\AVG2011\pruebas]
+Type=4
+Path=
+FileList=
+BuildTool=
+OptionString=
+AdditionalOptionString=
+[mru-list]
+1=C:\Documents and Settings\Sabas\Escritorio\AVG2011\pruebas.c
+[Windows]
+0=0000 %S 0 0 796 451 3 0
+[Units]
+Link=0
+Count=1
+1=C:\Documents and Settings\Sabas\Escritorio\AVG2011\pruebas
+[Opened Files]
+1=pruebas.c
+2=pruebas.h
+3=

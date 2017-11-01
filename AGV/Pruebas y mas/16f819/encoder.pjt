@@ -1,0 +1,28 @@
+[PROJECT]
+Target=F:\AGV\Programa\16f819\encoder.hex
+Development_Mode=
+Processor_Text=PIC16F819
+ToolSuite=CCS
+Processor=0x819F
+[F:\AGV\Programa\16f819\encoder]
+Type=4
+Path=
+FileList=
+BuildTool=
+OptionString=
+AdditionalOptionString=
+[mru-list]
+1=F:\AGV\Programa\16f819\encoder.c
+[Windows]
+0=0000 %S 0 0 796 451 3 0
+[Opened Files]
+1=encoder.c
+2=
+3=
+4=
+[Target Data]
+OptionString=-p +FM
+FileList=F:\AGV\Programa\16f819\encoder.c
+[Units]
+Count=1
+1=encoder (main)

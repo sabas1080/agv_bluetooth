@@ -1,0 +1,16 @@
+ÀÄAGV
+   ÃÄMAIN  0/108  Ram=0
+   ³  ÃÄ??0??
+   ³  ÃÄINI_CPU  0/106  Ram=0
+   ³  ÃÄFLASHEO  0/36  Ram=1
+   ³  ³  ÃÄ@delay_ms1  0/26  Ram=1
+   ³  ³  ÃÄ@delay_ms1  0/26  Ram=1
+   ³  ³  ÃÄ@delay_ms1  0/26  Ram=1
+   ³  ³  ÀÄ@delay_ms1  0/26  Ram=1
+   ³  ÃÄ@PSTRINGC_19200_31766_31767  0/36  Ram=2
+   ³  ÃÄmanual  0/8  Ram=0
+   ³  ÃÄ@PSTRINGC_19200_31766_31767  0/36  Ram=2
+   ³  ÃÄautomatico  0/8  Ram=0
+   ³  ÀÄ@PSTRINGC_19200_31766_31767  0/36  Ram=2
+   ÃÄEXT_isr  0/8  Ram=0
+   ÀÄRDA_isr  0/34  Ram=0

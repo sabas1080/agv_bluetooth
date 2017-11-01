@@ -1,0 +1,68 @@
+004-005 @READ_PROGRAM_MEMORY8.P1
+015     CCP_1_LOW
+015     CCP_1
+016     CCP_1_HIGH
+01F.6   C1OUT
+01F.7   C2OUT
+020     @INTERRUPT_AREA
+021     @INTERRUPT_AREA
+022     @INTERRUPT_AREA
+023     @INTERRUPT_AREA
+024     @INTERRUPT_AREA
+025     @INTERRUPT_AREA
+026     @INTERRUPT_AREA
+027     @INTERRUPT_AREA
+028     @INTERRUPT_AREA
+029     a
+02A     CAR
+02B     MAIN.@SCRATCH1
+02D     @delay_ms1.P1
+077     @SCRATCH
+078     @SCRATCH
+078     _RETURN_
+079     @SCRATCH
+07A     @SCRATCH
+09B-09C @READ_PROGRAM_MEMORY8.P1
+
+ROM Allocation:
+0035  @delay_ms1
+004A  res_isr
+0064  posicion
+006A  cpu
+008D  MAIN
+008D  @cinit
+
+
+User Memory space: 
+
+User Memory space: 
+
+Project Directory:
+    C:\Users\Sabas\Desktop\AGV\Programa\18f628\
+
+Project Files:
+    encoder.c                                               [02-dic-11 21:17  CRC=49731E09]
+    ..\..\..\..\..\..\Program Files\PICC\devices\16F628A.h  [27-jul-11 18:03  CRC=F34A08C3]
+
+Source signature=30072F8F
+
+Units:
+    C:\Users\Sabas\Desktop\AGV\Programa\18f628\encoder (main)
+
+Compiler Settings:
+    Processor:      PIC16F628A
+    Pointer Size:   16
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+
+Output Files:
+    Errors:      encoder.err
+    Ext Symbols: encoder.esym
+    INHX8:       encoder.hex
+    Symbols:     encoder.sym
+    List:        encoder.lst
+    Debug/COFF:  encoder.cof
+    Project:     encoder.PJT
+    Call Tree:   encoder.tre
+    Statistics:  encoder.STA

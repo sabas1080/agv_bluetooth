@@ -1,0 +1,53 @@
+004-005 @READ_PROGRAM_MEMORY8.P1
+015     CCP_1_LOW
+015     CCP_1
+016     CCP_1_HIGH
+01F.6   C1OUT
+01F.7   C2OUT
+020     dato
+021     @I2C_READ_1.P1
+022     @I2C_READ_1.@SCRATCH1
+077     @SCRATCH
+078     @SCRATCH
+078     _RETURN_
+079     @SCRATCH
+07A     @SCRATCH
+09B-09C @READ_PROGRAM_MEMORY8.P1
+
+ROM Allocation:
+0004  @I2C_READ_1
+0023  main
+0023  @cinit
+
+
+User Memory space: 
+
+User Memory space: 
+
+Project Directory:
+    M:\AGV\Programa\18f628\
+
+Project Files:
+    controladorencoder.c
+    C:\Program Files\PICC\devices\16F628A.h
+
+Units:
+    M:\AGV\Programa\18f628\controladorencoder (main)
+
+Compiler Settings:
+    Processor:      PIC16F628A
+    Pointer Size:   16
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+
+Output Files:
+    Errors:      controladorencoder.err
+    Ext Symbols: controladorencoder.esym
+    INHX8:       controladorencoder.hex
+    Symbols:     controladorencoder.sym
+    List:        controladorencoder.lst
+    Debug/COFF:  controladorencoder.cof
+    Project:     controladorencoder.PJT
+    Call Tree:   controladorencoder.tre
+    Statistics:  controladorencoder.sta

@@ -1,0 +1,142 @@
+CCS PCM C Compiler, Version 4.108, 26124               13-nov-11 10:27
+
+               Filename: M:\AGV\Programa\18f628\controladorencoder.lst
+
+               ROM used: 81 words (4%)
+                         Largest free fragment is 1967
+               RAM used: 6 (3%) at main() level
+                         8 (4%) worst case
+               Stack:    1 locations
+
+*
+0000:  MOVLW  00
+0001:  MOVWF  0A
+0002:  GOTO   023
+0003:  NOP
+.................... #include <16F628A.h> 
+.................... //////// Standard Header file for the PIC16F628A device //////////////// 
+.................... #device PIC16F628A 
+.................... #list 
+....................  
+....................  
+.................... #FUSES NOWDT                    //No Watch Dog Timer 
+.................... #FUSES HS                       //High speed Osc (> 4mhz for PCM/PCH) (>10mhz for PCD) 
+.................... #FUSES PUT                      //Power Up Timer 
+.................... #FUSES NOPROTECT                //Code not protected from reading 
+.................... #FUSES NOBROWNOUT               //No brownout reset 
+.................... #FUSES MCLR                     //Master Clear pin enabled 
+.................... #FUSES NOLVP                    //No low voltage prgming, B3(PIC16) or B5(PIC18) used for I/O 
+.................... #FUSES NOCPD                    //No EE protection 
+....................  
+.................... #use delay(clock=4000000) 
+....................  
+....................  
+.................... #use i2c(SLAVE, SDA=PIN_A2, SCL=PIN_A3, ADDRESS=0X08, FAST , /*FORCE_HW*/) 
+0004:  MOVLW  08
+0005:  MOVWF  22
+0006:  BSF    03.5
+0007:  BSF    05.3
+0008:  BSF    05.2
+0009:  BCF    03.5
+000A:  BTFSC  05.3
+000B:  GOTO   00A
+000C:  BTFSS  05.3
+000D:  GOTO   00C
+000E:  BTFSC  05.2
+000F:  BSF    03.0
+0010:  BTFSS  05.2
+0011:  BCF    03.0
+0012:  RLF    78,F
+0013:  DECFSZ 22,F
+0014:  GOTO   00A
+0015:  BTFSC  05.3
+0016:  GOTO   015
+0017:  BSF    03.5
+0018:  BCF    05.2
+0019:  BCF    03.5
+001A:  BCF    05.2
+001B:  BTFSS  05.3
+001C:  GOTO   01B
+001D:  NOP
+001E:  BSF    03.5
+001F:  BCF    05.3
+0020:  BCF    03.5
+0021:  BCF    05.3
+0022:  GOTO   048 (RETURN)
+....................  
+.................... int dato; 
+....................   
+....................  
+.................... void main() 
+.................... { 
+0023:  CLRF   04
+0024:  BCF    03.7
+0025:  MOVLW  1F
+0026:  ANDWF  03,F
+0027:  MOVLW  07
+0028:  MOVWF  1F
+....................  
+....................    setup_timer_0(RTCC_INTERNAL|RTCC_DIV_1); 
+0029:  BSF    03.5
+002A:  MOVF   01,W
+002B:  ANDLW  C7
+002C:  IORLW  08
+002D:  MOVWF  01
+....................    setup_timer_1(T1_DISABLED); 
+002E:  BCF    03.5
+002F:  CLRF   10
+....................    setup_timer_2(T2_DISABLED,0,1); 
+0030:  MOVLW  00
+0031:  MOVWF  78
+0032:  MOVWF  12
+0033:  MOVLW  00
+0034:  BSF    03.5
+0035:  MOVWF  12
+....................    setup_ccp1(CCP_OFF); 
+0036:  BSF    06.3
+0037:  BCF    03.5
+0038:  CLRF   17
+....................    setup_comparator(NC_NC_NC_NC); 
+0039:  MOVLW  07
+003A:  MOVWF  1F
+003B:  BSF    03.5
+003C:  MOVF   05,W
+003D:  MOVWF  05
+003E:  MOVLW  03
+003F:  MOVWF  77
+0040:  DECFSZ 77,F
+0041:  GOTO   040
+0042:  BCF    03.5
+0043:  MOVF   1F,W
+0044:  BCF    0C.6
+....................    //TODO: User Code  
+....................                 
+....................                
+....................        
+....................        
+....................       while(TRUE) 
+....................       { 
+....................                 
+....................             
+....................        dato=i2c_read(); 
+0045:  MOVLW  01
+0046:  MOVWF  77
+0047:  GOTO   004
+0048:  MOVF   78,W
+0049:  MOVWF  20
+....................        output_b(dato);         
+004A:  BSF    03.5
+004B:  CLRF   06
+004C:  BCF    03.5
+004D:  MOVF   20,W
+004E:  MOVWF  06
+....................              
+....................             
+....................       } 
+004F:  GOTO   045
+....................  
+.................... } 
+0050:  SLEEP
+
+Configuration Fuses:
+   Word  1: 3F22   HS NOWDT PUT NOPROTECT NOBROWNOUT MCLR NOLVP NOCPD

@@ -1,0 +1,26 @@
+[PROJECT]
+Target=C:\Users\Sabas\Desktop\AGV\Pruebas bluetooth\picblue.hex
+Development_Mode=
+Processor_Text=PIC18F452
+ToolSuite=CCS
+Processor=0x452F
+[C:\Users\Sabas\Desktop\AGV\Pruebas bluetooth\picblue]
+Type=4
+Path=
+FileList=
+BuildTool=
+OptionString=
+AdditionalOptionString=
+[mru-list]
+1=C:\Users\Sabas\Desktop\AGV\Pruebas bluetooth\picblue.c
+[Windows]
+0=0000 %S 0 0 796 451 3 0
+[Units]
+Link=0
+Count=1
+1=C:\Users\Sabas\Desktop\AGV\Pruebas bluetooth\picblue
+[Opened Files]
+1=picblue.c
+2=
+3=..\..\..\..\..\Program Files\PICC\devices\18F452.h
+4=

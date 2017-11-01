@@ -1,0 +1,4 @@
+>>> Warning 203 "encoder.c" Line 58(1,1): Condition always TRUE
+>>> Warning 216 "encoder.c" Line 67(0,1): Interrupts disabled during call to prevent re-entrancy:  (@delay_ms1)
+      Memory usage:   ROM=9%      RAM=8% - 8%
+      0 Errors,  2 Warnings.

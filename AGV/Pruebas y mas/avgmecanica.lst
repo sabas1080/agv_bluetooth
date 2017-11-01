@@ -1,0 +1,244 @@
+CCS PCH C Compiler, Version 4.108, 26124               13-nov-11 21:26
+
+               Filename: M:\AVG2011\avgmecanica.lst
+
+               ROM used: 310 bytes (1%)
+                         Largest free fragment is 32458
+               RAM used: 12 (1%) at main() level
+                         12 (1%) worst case
+               Stack:    1 locations
+
+*
+0000:  GOTO   0070
+.................... #include <18F4550.h> 
+.................... //////// Standard Header file for the PIC18F4550 device //////////////// 
+.................... #device PIC18F4550 
+.................... #list 
+....................  
+.................... #device adc=10 
+....................  
+.................... #FUSES NOWDT                    //No Watch Dog Timer 
+.................... #FUSES WDT128                   //Watch Dog Timer uses 1:128 Postscale 
+.................... #FUSES HS                       //High speed Osc (> 4mhz for PCM/PCH) (>10mhz for PCD) 
+.................... #FUSES NOPROTECT                //Code not protected from reading 
+.................... #FUSES NOBROWNOUT               //No brownout reset 
+.................... #FUSES BORV20                   //Brownout reset at 2.0V 
+.................... #FUSES PUT                      //Power Up Timer 
+.................... #FUSES NOCPD                    //No EE protection 
+.................... #FUSES STVREN                   //Stack full/underflow will cause reset 
+.................... #FUSES NODEBUG                  //No Debug mode for ICD 
+.................... #FUSES NOLVP                    //No low voltage prgming, B3(PIC16) or B5(PIC18) used for I/O 
+.................... #FUSES NOWRT                    //Program memory not write protected 
+.................... #FUSES NOWRTD                   //Data EEPROM not write protected 
+.................... #FUSES IESO                     //Internal External Switch Over mode enabled 
+.................... #FUSES FCMEN                    //Fail-safe clock monitor enabled 
+.................... #FUSES PBADEN                   //PORTB pins are configured as analog input channels on RESET 
+.................... #FUSES NOWRTC                   //configuration not registers write protected 
+.................... #FUSES NOWRTB                   //Boot block not write protected 
+.................... #FUSES NOEBTR                   //Memory not protected from table reads 
+.................... #FUSES NOEBTRB                  //Boot block not protected from table reads 
+.................... #FUSES NOCPB                    //No Boot Block code protection 
+.................... #FUSES MCLR                     //Master Clear pin enabled 
+.................... #FUSES LPT1OSC                  //Timer1 configured for low-power operation 
+.................... #FUSES NOXINST                  //Extended set extension and Indexed Addressing mode disabled (Legacy mode) 
+.................... #FUSES PLL12                    //Divide By 12(48MHz oscillator input) 
+.................... #FUSES CPUDIV4                  //System Clock by 4 
+.................... #FUSES USBDIV                   //USB clock source comes from PLL divide by 2 
+.................... #FUSES VREGEN                   //USB voltage regulator enabled 
+.................... #FUSES ICPRT                    //ICPRT enabled 
+....................  
+.................... #use delay(crystal=20000000,  clock=5000000) 
+....................  
+.................... //---------------------Variables Globales 
+.................... long sensor1, sensor2, pwm, pwm2; 
+....................  
+.................... void INT_CPU(void) 
+.................... { 
+....................  
+....................    setup_adc_ports(AN0_TO_AN1|VSS_VDD); 
+0004:  MOVF   FC1,W
+0006:  ANDLW  C0
+0008:  IORLW  0D
+000A:  MOVWF  FC1
+....................    setup_adc(ADC_CLOCK_DIV_2); 
+000C:  BCF    FC0.0
+000E:  BCF    FC0.1
+0010:  BCF    FC0.2
+0012:  BSF    FC0.7
+0014:  BSF    FC2.0
+....................    setup_psp(PSP_DISABLED); 
+0016:  BCF    F96.4
+....................    setup_spi(SPI_SS_DISABLED); 
+0018:  BCF    FC6.5
+001A:  BCF    F94.7
+001C:  BSF    F93.0
+001E:  BCF    F93.1
+0020:  MOVLW  01
+0022:  MOVWF  FC6
+0024:  MOVLW  00
+0026:  MOVWF  FC7
+....................    setup_wdt(WDT_OFF); 
+0028:  BCF    FD1.0
+....................    setup_timer_0(RTCC_INTERNAL); 
+002A:  MOVLW  80
+002C:  MOVWF  FD5
+....................    setup_timer_1(T1_DISABLED); 
+002E:  CLRF   FCD
+....................    setup_timer_2(T2_DIV_BY_16,77,1); 
+0030:  MOVLW  00
+0032:  IORLW  06
+0034:  MOVWF  FCA
+0036:  MOVLW  4D
+0038:  MOVWF  FCB
+....................    //setup_ccp1(CCP_PWM_FULL_BRIDGE|CCP_SHUTDOWN_AC_L|CCP_SHUTDOWN_BD_L); 
+....................    setup_ccp1(CCP_PWM); 
+003A:  BCF    F94.2
+003C:  BCF    F8B.2
+003E:  BCF    F96.6
+0040:  MOVLW  0C
+0042:  MOVWF  FBD
+0044:  CLRF   FB7
+0046:  CLRF   FB6
+....................    setup_ccp2(CCP_PWM); 
+0048:  BCF    F94.1
+004A:  BCF    F8B.1
+004C:  MOVWF  FBA
+....................    setup_comparator(NC_NC_NC_NC); 
+004E:  MOVLW  07
+0050:  MOVWF  FB4
+0052:  MOVF   F92,W
+0054:  MOVWF  F92
+0056:  MOVLW  03
+0058:  MOVWF  00
+005A:  DECFSZ 00,F
+005C:  BRA    005A
+005E:  BRA    0060
+0060:  MOVF   FB4,W
+0062:  BCF    FA1.6
+....................    set_tris_a(0xFF); 
+0064:  MOVLW  FF
+0066:  MOVWF  F92
+....................    set_tris_c(0x00); 
+0068:  MOVLW  00
+006A:  MOVWF  F94
+....................     
+.................... } 
+006C:  GOTO   0086 (RETURN)
+....................  
+.................... void main() 
+.................... { 
+0070:  CLRF   FF8
+0072:  BCF    FD0.7
+0074:  CLRF   FEA
+0076:  CLRF   FE9
+0078:  MOVF   FC1,W
+007A:  ANDLW  C0
+007C:  IORLW  0F
+007E:  MOVWF  FC1
+0080:  MOVLW  07
+0082:  MOVWF  FB4
+....................    INT_CPU(); 
+0084:  BRA    0004
+....................     
+....................    while(1) 
+....................    { 
+....................    set_adc_channel(0); 
+0086:  MOVLW  00
+0088:  MOVWF  01
+008A:  MOVF   FC2,W
+008C:  ANDLW  C3
+008E:  IORWF  01,W
+0090:  MOVWF  FC2
+....................    sensor1=read_adc(); 
+0092:  BSF    FC2.1
+0094:  BTFSC  FC2.1
+0096:  BRA    0094
+0098:  MOVFF  FC3,04
+009C:  MOVFF  FC4,05
+....................    delay_us(5); 
+00A0:  BRA    00A2
+00A2:  BRA    00A4
+00A4:  BRA    00A6
+....................    pwm=sensor1/4; 
+00A6:  RRCF   05,W
+00A8:  MOVWF  09
+00AA:  RRCF   04,W
+00AC:  MOVWF  08
+00AE:  RRCF   09,F
+00B0:  RRCF   08,F
+00B2:  MOVLW  3F
+00B4:  ANDWF  09,F
+....................    set_pwm1_duty(pwm); 
+00B6:  MOVFF  09,02
+00BA:  MOVFF  08,01
+00BE:  RRCF   02,F
+00C0:  RRCF   01,F
+00C2:  RRCF   02,F
+00C4:  RRCF   01,F
+00C6:  RRCF   02,F
+00C8:  MOVFF  01,FBE
+00CC:  RRCF   02,F
+00CE:  RRCF   02,W
+00D0:  ANDLW  30
+00D2:  MOVWF  00
+00D4:  MOVF   FBD,W
+00D6:  ANDLW  CF
+00D8:  IORWF  00,W
+00DA:  MOVWF  FBD
+....................     
+....................    set_adc_channel(1); 
+00DC:  MOVLW  04
+00DE:  MOVWF  01
+00E0:  MOVF   FC2,W
+00E2:  ANDLW  C3
+00E4:  IORWF  01,W
+00E6:  MOVWF  FC2
+....................    sensor2=read_adc(); 
+00E8:  BSF    FC2.1
+00EA:  BTFSC  FC2.1
+00EC:  BRA    00EA
+00EE:  MOVFF  FC3,06
+00F2:  MOVFF  FC4,07
+....................    delay_us(5); 
+00F6:  BRA    00F8
+00F8:  BRA    00FA
+00FA:  BRA    00FC
+....................    pwm2=sensor2/4; 
+00FC:  RRCF   07,W
+00FE:  MOVWF  0B
+0100:  RRCF   06,W
+0102:  MOVWF  0A
+0104:  RRCF   0B,F
+0106:  RRCF   0A,F
+0108:  MOVLW  3F
+010A:  ANDWF  0B,F
+....................    set_pwm2_duty(pwm2); 
+010C:  MOVFF  0B,02
+0110:  MOVFF  0A,01
+0114:  RRCF   02,F
+0116:  RRCF   01,F
+0118:  RRCF   02,F
+011A:  RRCF   01,F
+011C:  RRCF   02,F
+011E:  MOVFF  01,FBB
+0122:  RRCF   02,F
+0124:  RRCF   02,W
+0126:  ANDLW  30
+0128:  MOVWF  00
+012A:  MOVF   FBA,W
+012C:  ANDLW  CF
+012E:  IORWF  00,W
+0130:  MOVWF  FBA
+....................    } 
+0132:  BRA    0086
+.................... } 
+0134:  SLEEP 
+
+Configuration Fuses:
+   Word  1: CC3C   IESO FCMEN HS PLL5 CPUDIV4 USBDIV
+   Word  2: 0E38   NOBROWNOUT WDT128 NOWDT BORV20 PUT VREGEN
+   Word  3: 8700   PBADEN CCP2C1 MCLR LPT1OSC
+   Word  4: 00A1   STVREN NODEBUG NOLVP NOXINST ICPRT
+   Word  5: C00F   NOPROTECT NOCPD NOCPB
+   Word  6: E00F   NOWRT NOWRTD NOWRTC NOWRTB
+   Word  7: 400F   NOEBTR NOEBTRB

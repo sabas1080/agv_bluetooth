@@ -1,0 +1,157 @@
+004     @WRITE_PROGRAM_MEMORY8.P1
+004-005 @READ_PROGRAM_MEMORY8.P2
+008     PSP_DATA
+008     lcd
+008     lcdlat
+015     CCP_1_LOW
+015     CCP_1
+016     CCP_1_HIGH
+01B     CCP_2_LOW
+01B     CCP_2
+01C     CCP_2_HIGH
+020     @TRIS_C
+021     direccion
+022     checksum
+023     checksumrec
+024-027 valor2
+028     valor
+029     dato
+02A     contador1
+02B-02C contador2
+02D     @PSTRINGCN7_99.P1
+02D-030 @PRINTF_L32D_99FPFPF.P2
+02D     lcd_init.i
+02D     @PRINTF_D_99.P1
+02D-02E @ITOF.P2
+02D     muestra_datos.@SCRATCH1
+02D     @PSTRINGC7_99.@SCRATCH1
+02D     MAIN.@SCRATCH1
+02E     @PRINTF_D_99.P1
+02E     lcd_init.@SCRATCH1
+02E     @PSTRINGC7_99.@SCRATCH2
+02E     @PSTRINGCN7_99.@SCRATCH1
+02F     @PSTRINGC7_99.@SCRATCH3
+02F     @PSTRINGCN7_99.@SCRATCH2
+02F     @PRINTF_D_99.@SCRATCH1
+030     @PSTRINGCN7_99.@SCRATCH3
+030     @PRINTF_D_99.@SCRATCH2
+031     @PRINTF_L32D_99FPFPF.P1
+031     @PRINTF_D_99.@SCRATCH3
+032     @PRINTF_L32D_99FPFPF.@SCRATCH1
+032     @PRINTF_D_99.@SCRATCH4
+033     @DIV88.P1
+033     @PRINTF_L32D_99FPFPF.@SCRATCH2
+034     @DIV88.P1
+034     @PRINTF_L32D_99FPFPF.@SCRATCH3
+035     @PRINTF_L32D_99FPFPF.@SCRATCH4
+035     @DIV88.@SCRATCH1
+036     @PRINTF_L32D_99FPFPF.@SCRATCH5
+037     @PRINTF_L32D_99FPFPF.@SCRATCH6
+038     @PRINTF_L32D_99FPFPF.@SCRATCH7
+039     @PRINTF_L32D_99FPFPF.@SCRATCH8
+03A     lcd_putc.c
+03A-03D @MULFF.P1
+03A-03D @DIV3232.P2
+03A-03D @FTOSD.P3
+03B     lcd_gotoxy.x
+03B     @delay_ms1.P1
+03C     lcd_gotoxy.y
+03D     lcd_gotoxy.address
+03E-041 @MULFF.P1
+03E-041 @DIV3232.P2
+03E     lcd_gotoxy.@SCRATCH1
+03E     @FTOSD.@SCRATCH1
+03F     lcd_send_byte.address
+040     lcd_send_byte.n
+041     lcd_read_byte.low
+041     lcd_send_byte.@SCRATCH1
+042     lcd_send_nibble.n
+042     lcd_read_byte.high
+042     @MULFF.@SCRATCH1
+042     @DIV3232.@SCRATCH1
+043     lcd_read_byte.@SCRATCH1
+043     @MULFF.@SCRATCH2
+043     @DIV3232.@SCRATCH2
+044     @MULFF.@SCRATCH3
+044     @DIV3232.@SCRATCH3
+045     @MULFF.@SCRATCH4
+045     @DIV3232.@SCRATCH4
+046     @MULFF.@SCRATCH5
+046     @DIV3232.@SCRATCH5
+077     @SCRATCH
+078     @SCRATCH
+078     _RETURN_
+079     @SCRATCH
+07A     @SCRATCH
+088     lcdtris
+09C.6   C1OUT
+09C.7   C2OUT
+10D-10E @WRITE_PROGRAM_MEMORY8.P1
+10D-10E @READ_PROGRAM_MEMORY8.P2
+
+ROM Allocation:
+0048  @delay_ms1
+0004  LCD_INIT_STRING
+0075  lcd_read_byte
+0069  lcd_read_nibble
+005D  lcd_send_nibble
+006F  lcd_send_byte
+00AF  lcd_init
+00DF  lcd_gotoxy
+00F1  lcd_putc
+03F2  muestra_datos
+000C  @const114
+011E  @PSTRINGC7_99
+0013  @const116
+0017  @const117
+045B  MAIN
+0020  @const120
+0164  @ITOF
+0029  @const123
+0183  @PSTRINGCN7_99
+0235  @MULFF
+02BB  @FTOSD
+01D2  @DIV3232
+0221  @PRINTF_L32D_99FPFPF
+0031  @const137
+0376  @DIV88
+038B  @PRINTF_D_99
+0037  @const144
+003F  @const145
+045B  @cinit
+
+
+User Memory space: 
+
+User Memory space: 
+
+Project Directory:
+    M:\AGV\Programa\16f890\
+
+Project Files:
+    encoder890.c
+    encoder890.h
+    C:\Program Files\PICC\devices\16F877A.h
+    C:\Program Files\PICC\drivers\LCD.C
+
+Units:
+    M:\AGV\Programa\16f890\encoder890 (main)
+
+Compiler Settings:
+    Processor:      PIC16F877A
+    Pointer Size:   16
+    ADC Range:      0-255
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+
+Output Files:
+    Errors:      encoder890.err
+    Ext Symbols: encoder890.esym
+    INHX8:       encoder890.hex
+    Symbols:     encoder890.sym
+    List:        encoder890.lst
+    Debug/COFF:  encoder890.cof
+    Project:     encoder890.PJT
+    Call Tree:   encoder890.tre
+    Statistics:  encoder890.sta

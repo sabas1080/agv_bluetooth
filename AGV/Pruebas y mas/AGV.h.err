@@ -1,0 +1,4 @@
+>>> Warning 202 "AGV.c" Line 49(9,16): Variable never used:   VAL_ADC
+>>> Warning 202 "AGV.c" Line 50(18,21): Variable never used:   CAR
+      Memory usage:   ROM=0%      RAM=0% - 0%
+      0 Errors,  2 Warnings.

@@ -1,0 +1,7 @@
+юдAGV12112011
+   юдMAIN  0/120  Ram=1
+      цд??0??
+      цдINI_CPU  0/108  Ram=0
+      цд@I2C_WRITE_1  0/72  Ram=1
+      цд@I2C_WRITE_1  0/72  Ram=1
+      юд@delay_ms1  0/28  Ram=1

@@ -1,0 +1,55 @@
+
+ROM used: 580 (2%)
+          580 (2%) including unused fragments
+
+          1 Average locations per line
+          11 Average locations per statement
+
+RAM used: 31 (2%) at main() level
+          33 (2%) worst case
+
+Stack used: 3 worst case (out of 31 total available)
+
+Lines Stmts  %   Files
+----- ----- ---  -----
+  208    52 100  AGV.c
+  458     0   0  ..\..\..\..\Program Files\PICC\devices\18F4550.h
+----- -----
+  666    52 Total
+
+Page ROM  %  RAM   Vol Diff  Functions:
+---- --- --- ---   --- ----  ----------
+0     26   2   1             @delay_ms1
+0      8   1   0    17  1.3  EXT_isr
+0     34   3   0    82  2.3  RDA_isr
+0     36   3   1   183  2.3  FLASHEO
+0      8   1   0    18  1.0  manual
+0      8   1   0    18  1.0  automatico
+0    106   9   0   464  2.9  INI_CPU
+0    108   9   0   285  5.1  MAIN
+0      8   1   0             @const89
+0     36   3   2             @PSTRINGC_19200_31766_31767
+0     12   1   0             @const91
+0      8   1   0             @const92
+
+Program metrics:
+    Functions               7
+    Statements              52
+    Comments                159
+    Volume (V)              1574
+    Difficilty (D)          16.9
+    Effort to implement (E) 26587
+    Time to implement (T)   25 minutes
+    Est Delivered Bugs (B)  0
+    Cyclomatic Complexity   5
+    Maintainability (MI)    155
+
+ Segment     Used  Free
+-----------  ----  ----
+00000-00002     4  0  
+00004-00006     0  4  
+00008-000B8   178  0  
+000BA-07FFE   398  32184  
+
+
+

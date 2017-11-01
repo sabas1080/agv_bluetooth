@@ -1,0 +1,53 @@
+
+ROM used: 756 (2%)
+          756 (2%) including unused fragments
+
+          1 Average locations per line
+          6 Average locations per statement
+
+RAM used: 27 (1%) at main() level
+          29 (1%) worst case
+
+Stack used: 3 worst case (out of 31 total available)
+
+Lines Stmts  %   Files
+----- ----- ---  -----
+  258   130 100  controldemotores.c
+  462     0   0  ..\..\..\..\..\Program Files\PICC\devices\18F4550.h
+----- -----
+  720   130 Total
+
+Page ROM  %  RAM   Vol Diff  Functions:
+---- --- --- ---   --- ----  ----------
+0     38   3   1             @delay_ms1
+0     12   1   0    21  0.9  cerrado
+0     14   1   0    24  1.5  RDA_isr
+0     16   1   0   106  1.3  adelante
+0     16   1   0   106  1.3  atras
+0     16   1   0   106  1.3  derecha_adelante
+0     16   1   0   106  1.3  izquierda_adelante
+0     16   1   0   106  1.3  stop
+0    104   7   0   497  2.4  cpu
+0    326  22   0   928  2.9  MAIN
+
+Program metrics:
+    Functions               9
+    Statements              130
+    Comments                115
+    Volume (V)              2993
+    Difficilty (D)          15.0
+    Effort to implement (E) 44750
+    Time to implement (T)   41 minutes
+    Est Delivered Bugs (B)  0
+    Cyclomatic Complexity   5
+    Maintainability (MI)    64
+
+ Segment     Used  Free
+-----------  ----  ----
+00000-00002     4  0  
+00004-00006     0  4  
+00008-000B8   178  0  
+000BA-07FFE   574  32008  
+
+
+

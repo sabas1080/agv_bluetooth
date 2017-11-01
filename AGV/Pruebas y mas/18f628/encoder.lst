@@ -1,0 +1,269 @@
+CCS PCM C Compiler, Version 4.124, 5967               02-dic-11 21:17
+
+               Filename: C:\Users\Sabas\Desktop\AGV\Programa\18f628\encoder.lst
+
+               ROM used: 186 words (9%)
+                         Largest free fragment is 1862
+               RAM used: 17 (8%) at main() level
+                         19 (8%) worst case
+               Stack:    3 worst case (1 in main + 2 for interrupts)
+
+*
+0000:  MOVLW  00
+0001:  MOVWF  0A
+0002:  GOTO   08D
+0003:  NOP
+0004:  MOVWF  7F
+0005:  SWAPF  03,W
+0006:  CLRF   03
+0007:  MOVWF  21
+0008:  MOVF   7F,W
+0009:  MOVWF  20
+000A:  MOVF   0A,W
+000B:  MOVWF  27
+000C:  CLRF   0A
+000D:  SWAPF  20,F
+000E:  MOVF   04,W
+000F:  MOVWF  22
+0010:  MOVF   77,W
+0011:  MOVWF  23
+0012:  MOVF   78,W
+0013:  MOVWF  24
+0014:  MOVF   79,W
+0015:  MOVWF  25
+0016:  MOVF   7A,W
+0017:  MOVWF  26
+0018:  BCF    03.7
+0019:  BCF    03.5
+001A:  BTFSS  0B.4
+001B:  GOTO   01E
+001C:  BTFSC  0B.1
+001D:  GOTO   064
+001E:  MOVLW  8C
+001F:  MOVWF  04
+0020:  BTFSS  00.5
+0021:  GOTO   024
+0022:  BTFSC  0C.5
+0023:  GOTO   04A
+0024:  MOVF   22,W
+0025:  MOVWF  04
+0026:  MOVF   23,W
+0027:  MOVWF  77
+0028:  MOVF   24,W
+0029:  MOVWF  78
+002A:  MOVF   25,W
+002B:  MOVWF  79
+002C:  MOVF   26,W
+002D:  MOVWF  7A
+002E:  MOVF   27,W
+002F:  MOVWF  0A
+0030:  SWAPF  21,W
+0031:  MOVWF  03
+0032:  SWAPF  7F,F
+0033:  SWAPF  7F,W
+0034:  RETFIE
+.................... #include <16F628A.h> 
+.................... //////// Standard Header file for the PIC16F628A device //////////////// 
+.................... #device PIC16F628A 
+.................... #list 
+....................  
+....................  
+.................... #FUSES NOWDT                    //No Watch Dog Timer 
+.................... #FUSES HS                       //High speed Osc (> 4mhz for PCM/PCH) (>10mhz for PCD) 
+.................... #FUSES PUT                      //Power Up Timer 
+.................... #FUSES NOPROTECT                //Code not protected from reading 
+.................... #FUSES NOBROWNOUT               //No brownout reset 
+.................... #FUSES MCLR                     //Master Clear pin enabled 
+.................... #FUSES NOLVP                    //No low voltage prgming, B3(PIC16) or B5(PIC18) used for I/O 
+.................... #FUSES NOCPD                    //No EE protection 
+....................  
+.................... #use delay(clock=4000000) 
+0035:  MOVLW  2D
+0036:  MOVWF  04
+0037:  BCF    03.7
+0038:  MOVF   00,W
+0039:  BTFSC  03.2
+003A:  GOTO   049
+003B:  MOVLW  01
+003C:  MOVWF  78
+003D:  CLRF   77
+003E:  DECFSZ 77,F
+003F:  GOTO   03E
+0040:  DECFSZ 78,F
+0041:  GOTO   03D
+0042:  MOVLW  4A
+0043:  MOVWF  77
+0044:  DECFSZ 77,F
+0045:  GOTO   044
+0046:  GOTO   047
+0047:  DECFSZ 00,F
+0048:  GOTO   03B
+0049:  RETURN
+.................... #use rs232(baud=9600,parity=N,xmit=PIN_B2,rcv=PIN_B1,bits=8) 
+....................  
+.................... char a,CAR; 
+....................  
+....................  
+.................... #int_RDA 
+.................... void res_isr() 
+.................... { 
+....................    disable_interrupts(int_RDA); 
+004A:  BSF    03.5
+004B:  BCF    0C.5
+....................    disable_interrupts(GLOBAL); 
+004C:  BCF    03.5
+004D:  BCF    0B.6
+004E:  BCF    0B.7
+004F:  BTFSC  0B.7
+0050:  GOTO   04E
+....................    disable_interrupts(INT_EXT); 
+0051:  BCF    0B.4
+....................    delay_ms(100); 
+0052:  MOVLW  64
+0053:  MOVWF  2D
+0054:  CALL   035
+....................    CAR=getc(); 
+0055:  BTFSS  0C.5
+0056:  GOTO   055
+0057:  MOVF   1A,W
+0058:  MOVWF  2A
+....................    if(CAR=='c') 
+0059:  MOVF   2A,W
+005A:  SUBLW  63
+005B:  BTFSS  03.2
+005C:  GOTO   061
+....................    { 
+....................    printf("%c",a); 
+005D:  MOVF   29,W
+005E:  BTFSS  0C.4
+005F:  GOTO   05E
+0060:  MOVWF  19
+....................    } 
+.................... } 
+....................  
+0061:  BCF    0C.5
+0062:  BCF    0A.3
+0063:  GOTO   024
+.................... #int_EXT 
+.................... void posicion() 
+.................... { 
+....................    disable_interrupts(int_RDA); 
+0064:  BSF    03.5
+0065:  BCF    0C.5
+....................     
+.................... } 
+....................  
+0066:  BCF    03.5
+0067:  BCF    0B.1
+0068:  BCF    0A.3
+0069:  GOTO   024
+.................... void cpu(void) 
+.................... { 
+....................  
+....................    setup_timer_0(RTCC_INTERNAL|RTCC_DIV_1); 
+006A:  BSF    03.5
+006B:  MOVF   01,W
+006C:  ANDLW  C7
+006D:  IORLW  08
+006E:  MOVWF  01
+....................    setup_timer_1(T1_DISABLED); 
+006F:  BCF    03.5
+0070:  CLRF   10
+....................    setup_timer_2(T2_DISABLED,0,1); 
+0071:  MOVLW  00
+0072:  MOVWF  78
+0073:  MOVWF  12
+0074:  MOVLW  00
+0075:  BSF    03.5
+0076:  MOVWF  12
+....................    setup_ccp1(CCP_OFF); 
+0077:  BSF    06.3
+0078:  BCF    03.5
+0079:  CLRF   17
+....................    setup_comparator(NC_NC_NC_NC); 
+007A:  MOVLW  07
+007B:  MOVWF  1F
+007C:  BSF    03.5
+007D:  MOVF   05,W
+007E:  MOVWF  05
+007F:  MOVLW  03
+0080:  MOVWF  77
+0081:  DECFSZ 77,F
+0082:  GOTO   081
+0083:  BCF    03.5
+0084:  MOVF   1F,W
+0085:  BCF    0C.6
+....................    enable_interrupts(int_RDA); 
+0086:  BSF    03.5
+0087:  BSF    0C.5
+....................    enable_interrupts(GLOBAL); 
+0088:  MOVLW  C0
+0089:  BCF    03.5
+008A:  IORWF  0B,F
+....................    enable_interrupts(INT_EXT); 
+008B:  BSF    0B.4
+....................  } 
+008C:  GOTO   09C (RETURN)
+....................  
+.................... void main(){ 
+008D:  CLRF   04
+008E:  BCF    03.7
+008F:  MOVLW  1F
+0090:  ANDWF  03,F
+0091:  MOVLW  19
+0092:  BSF    03.5
+0093:  MOVWF  19
+0094:  MOVLW  A6
+0095:  MOVWF  18
+0096:  MOVLW  90
+0097:  BCF    03.5
+0098:  MOVWF  18
+0099:  MOVLW  07
+009A:  MOVWF  1F
+....................     
+....................    CPU(); 
+009B:  GOTO   06A
+....................    a=64; 
+009C:  MOVLW  40
+009D:  MOVWF  29
+....................     
+....................    while(1) 
+....................    { 
+....................    enable_interrupts(int_RDA); 
+009E:  BSF    03.5
+009F:  BSF    0C.5
+....................    enable_interrupts(GLOBAL); 
+00A0:  MOVLW  C0
+00A1:  BCF    03.5
+00A2:  IORWF  0B,F
+....................    output_high(PIN_A0); 
+00A3:  BSF    03.5
+00A4:  BCF    05.0
+00A5:  BCF    03.5
+00A6:  BSF    05.0
+....................    delay_ms(1000); 
+00A7:  MOVLW  04
+00A8:  MOVWF  2B
+00A9:  CLRF   28
+00AA:  BTFSC  0B.7
+00AB:  BSF    28.7
+00AC:  BCF    0B.7
+00AD:  MOVLW  FA
+00AE:  MOVWF  2D
+00AF:  CALL   035
+00B0:  BTFSC  28.7
+00B1:  BSF    0B.7
+00B2:  DECFSZ 2B,F
+00B3:  GOTO   0A9
+....................    output_low(PIN_A0); 
+00B4:  BSF    03.5
+00B5:  BCF    05.0
+00B6:  BCF    03.5
+00B7:  BCF    05.0
+....................    } 
+00B8:  GOTO   09E
+.................... } 
+00B9:  SLEEP
+
+Configuration Fuses:
+   Word  1: 3F22   NOWDT PUT HS MCLR NOBROWNOUT NOLVP NOCPD NOPROTECT

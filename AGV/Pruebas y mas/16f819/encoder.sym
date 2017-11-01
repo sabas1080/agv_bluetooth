@@ -1,0 +1,59 @@
+004     @WRITE_PROGRAM_MEMORY8.P1
+004-005 @READ_PROGRAM_MEMORY8.P2
+015     CCP_1
+015     CCP_1_LOW
+016     CCP_1_HIGH
+020     @INTERRUPT_AREA
+021     @INTERRUPT_AREA
+022     @INTERRUPT_AREA
+023     @INTERRUPT_AREA
+024     @INTERRUPT_AREA
+025     @INTERRUPT_AREA
+026     @INTERRUPT_AREA
+027     @INTERRUPT_AREA
+077     @SCRATCH
+078     @SCRATCH
+078     _RETURN_
+079     @SCRATCH
+07A     @SCRATCH
+10D-10E @READ_PROGRAM_MEMORY8.P1
+10D-10E @WRITE_PROGRAM_MEMORY8.P2
+
+ROM Allocation:
+0031  ssp_interupt
+0038  MAIN
+0038  @cinit
+
+
+User Memory space: 
+
+User Memory space: 
+
+Project Directory:
+    F:\AGV\Programa\16f819\
+
+Project Files:
+    encoder.c
+    C:\Archivos de programa\PICC\devices\16F819.h
+
+Units:
+    F:\AGV\Programa\16f819\encoder (main)
+
+Compiler Settings:
+    Processor:      PIC16F819
+    Pointer Size:   16
+    ADC Range:      0-255
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+
+Output Files:
+    Errors:      encoder.err
+    Ext Symbols: encoder.esym
+    INHX8:       encoder.hex
+    Symbols:     encoder.sym
+    List:        encoder.lst
+    Debug/COFF:  encoder.cof
+    Project:     encoder.PJT
+    Call Tree:   encoder.tre
+    Statistics:  encoder.sta

@@ -1,0 +1,65 @@
+000     @SCRATCH
+001     @SCRATCH
+001     _RETURN_
+002     @SCRATCH
+003     @SCRATCH
+004-005 sensor1
+006-007 sensor2
+008-009 pwm
+00A-00B pwm2
+F83     PSP_DATA
+FB4.6   C1OUT
+FB4.7   C2OUT
+FBB     CCP_2
+FBB     CCP_2_LOW
+FBC     CCP_2_HIGH
+FBE     CCP_1_LOW
+FBE     CCP_1
+FBF     CCP_1_HIGH
+FE1-FE2 @READ_PACKED_MEMORY.P1
+FE1-FE2 @WRITE_PACKED_MEMORY.P2
+FE9-FEA @READ_PROGRAM_MEMORY.P1
+FE9-FEA @WRITE_PROGRAM_MEMORY.P2
+FE9-FEA @READ_PACKED_MEMORY.P3
+FE9-FEA @WRITE_PACKED_MEMORY.P4
+FF6-FF8 @WRITE_PROGRAM_MEMORY.P1
+FF6-FF8 @READ_PROGRAM_MEMORY.P2
+
+ROM Allocation:
+0004  INT_CPU
+0070  MAIN
+0070  @cinit
+
+
+User Memory space: 
+
+User Memory space: 
+
+Project Directory:
+    M:\AVG2011\
+
+Project Files:
+    avgmecanica.c
+    C:\Program Files\PICC\devices\18F4550.h
+
+Units:
+    M:\AVG2011\avgmecanica (main)
+
+Compiler Settings:
+    Processor:      PIC18F4550
+    Pointer Size:   16
+    ADC Range:      0-1023
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+
+Output Files:
+    Errors:      avgmecanica.err
+    Ext Symbols: avgmecanica.esym
+    INHX32:      avgmecanica.hex
+    Symbols:     avgmecanica.sym
+    List:        avgmecanica.lst
+    Debug/COFF:  avgmecanica.cof
+    Project:     avgmecanica.PJT
+    Call Tree:   avgmecanica.tre
+    Statistics:  avgmecanica.sta

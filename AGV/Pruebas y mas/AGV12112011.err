@@ -1,0 +1,4 @@
+*** Error 24 "C:\Program Files\PICC\devices\18F4550.h" Line 2(9,19): Unknown device type    -- Try PCH
+      1 Errors,  0 Warnings.
+*** Error 12 "AGV12112011.c" Line 212(21,22): Undefined identifier  -- i2c_poll
+      1 Errors,  0 Warnings.

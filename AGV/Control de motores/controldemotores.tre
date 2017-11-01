@@ -1,0 +1,24 @@
+ÀÄcontroldemotores
+   ÃÄMAIN  0/326  Ram=0
+   ³  ÃÄ??0??
+   ³  ÃÄcpu  0/104  Ram=0
+   ³  ÃÄ@delay_ms1  0/38  Ram=1
+   ³  ÃÄ@delay_ms1  0/38  Ram=1
+   ³  ÃÄadelante  0/16  Ram=0
+   ³  ÃÄ@delay_ms1  0/38  Ram=1
+   ³  ÃÄ@delay_ms1  0/38  Ram=1
+   ³  ÃÄatras  0/16  Ram=0
+   ³  ÃÄ@delay_ms1  0/38  Ram=1
+   ³  ÃÄ@delay_ms1  0/38  Ram=1
+   ³  ÃÄstop  0/16  Ram=0
+   ³  ÃÄ@delay_ms1  0/38  Ram=1
+   ³  ÃÄ@delay_ms1  0/38  Ram=1
+   ³  ÃÄderecha_adelante  0/16  Ram=0
+   ³  ÃÄ@delay_ms1  0/38  Ram=1
+   ³  ÃÄ@delay_ms1  0/38  Ram=1
+   ³  ÃÄizquierda_adelante  0/16  Ram=0
+   ³  ÃÄ@delay_ms1  0/38  Ram=1
+   ³  ÀÄ@delay_ms1  0/38  Ram=1
+   ÃÄcerrado  0/12  Ram=0
+   ³  ÀÄ@delay_ms1  0/38  Ram=1
+   ÀÄRDA_isr  0/14  Ram=0

@@ -1,0 +1,40 @@
+[PROJECT]
+Target=AGV12112011.HEX
+Development_Mode=2
+Processor=0x4550
+Processor_Text=PIC18F4550
+ToolSuite=CCS
+
+[Directories]
+Include=
+Library=
+LinkerScript=
+
+[Target Data]
+FileList=F:\AGV\Programa\AGV12112011.c
+BuildTool=C-COMPILER
+OptionString=+FH
+AdditionalOptionString=
+BuildRequired=1
+
+[AGV12112011.c]
+Type=4
+Path=
+FileList=
+BuildTool=
+OptionString=
+AdditionalOptionString=
+
+[mru-list]
+1=AGV121~1.C
+
+[Windows]
+0=0000 AGV121~1.C 0 0 796 451 3 0
+
+[Opened Files]
+1=AGV12112011.c
+2=avgmecanica.c
+3=
+[Units]
+Count=1
+1=AGV12112011 (main)

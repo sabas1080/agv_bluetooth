@@ -1,0 +1,45 @@
+
+ROM used: 332 (1%)
+          332 (1%) including unused fragments
+
+          0 Average locations per line
+          7 Average locations per statement
+
+RAM used: 11 (1%) at main() level
+          12 (1%) worst case
+
+Stack used: 1 worst case (out of 31 total available)
+
+Lines Stmts  %   Files
+----- ----- ---  -----
+  250    45 100  AGV12112011.c
+  458     0   0  C:\Archivos de programa\PICC\devices\18F4550.h
+----- -----
+  708    45 Total
+
+Page ROM  %  RAM   Vol Diff  Functions:
+---- --- --- ---   --- ----  ----------
+0     28   4   1             @delay_ms1
+0     72  11   1             @I2C_WRITE_1
+0    108  16   0   491  2.9  INI_CPU
+0    120  18   1   183  2.7  MAIN
+
+Program metrics:
+    Functions               2
+    Statements              45
+    Comments                227
+    Volume (V)              793
+    Difficilty (D)          5.4
+    Effort to implement (E) 4315
+    Time to implement (T)   4 minutes
+    Est Delivered Bugs (B)  0
+    Cyclomatic Complexity   1
+    Maintainability (MI)    54
+
+ Segment     Used  Free
+-----------  ----  ----
+00000-00002     4  0  
+00004-07FFE   328  32436  
+
+
+

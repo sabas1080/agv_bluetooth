@@ -1,0 +1,43 @@
+
+ROM used: 310 (1%)
+          310 (1%) including unused fragments
+
+          1 Average locations per line
+          12 Average locations per statement
+
+RAM used: 12 (1%) at main() level
+          12 (1%) worst case
+
+Stack used: 1 worst case (out of 31 total available)
+
+Lines Stmts  %   Files
+----- ----- ---  -----
+   78    26 100  avgmecanica.c
+  458     0   0  C:\Program Files\PICC\devices\18F4550.h
+----- -----
+  536    26 Total
+
+Page ROM  %  RAM   Vol Diff  Functions:
+---- --- --- ---   --- ----  ----------
+0    108  17   0   318  2.3  INT_CPU
+0    198  32   0   275  2.8  MAIN
+
+Program metrics:
+    Functions               2
+    Statements              26
+    Comments                106
+    Volume (V)              709
+    Difficilty (D)          5.1
+    Effort to implement (E) 3628
+    Time to implement (T)   3 minutes
+    Est Delivered Bugs (B)  0
+    Cyclomatic Complexity   1
+    Maintainability (MI)    51
+
+ Segment     Used  Free
+-----------  ----  ----
+00000-00002     4  0  
+00004-07FFE   306  32458  
+
+
+

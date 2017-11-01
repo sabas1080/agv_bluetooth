@@ -1,0 +1,443 @@
+CCS PCH C Compiler, Version 4.108, 16781               07-nov-11 23:17
+
+               Filename: C:\Users\Sabas\Desktop\AGV\AGV.lst
+
+               ROM used: 580 bytes (2%)
+                         Largest free fragment is 32184
+               RAM used: 31 (2%) at main() level
+                         33 (2%) worst case
+               Stack:    3 worst case (2 in main + 1 for interrupts)
+
+*
+0000:  GOTO   01DC
+*
+0008:  MOVWF  04
+000A:  MOVFF  FD8,05
+000E:  MOVFF  FE0,06
+0012:  MOVLB  0
+0014:  MOVFF  FE9,0C
+0018:  MOVFF  FEA,07
+001C:  MOVFF  FE1,08
+0020:  MOVFF  FE2,09
+0024:  MOVFF  FD9,0A
+0028:  MOVFF  FDA,0B
+002C:  MOVFF  FF3,12
+0030:  MOVFF  FF4,13
+0034:  MOVFF  FFA,14
+0038:  MOVFF  FF5,15
+003C:  MOVFF  FF6,16
+0040:  MOVFF  FF7,17
+0044:  MOVFF  00,0E
+0048:  MOVFF  01,0F
+004C:  MOVFF  02,10
+0050:  MOVFF  03,11
+0054:  BTFSS  FF2.4
+0056:  GOTO   0060
+005A:  BTFSC  FF2.1
+005C:  GOTO   00BA
+0060:  BTFSS  F9D.5
+0062:  GOTO   006C
+0066:  BTFSC  F9E.5
+0068:  GOTO   00C2
+006C:  MOVFF  0E,00
+0070:  MOVFF  0F,01
+0074:  MOVFF  10,02
+0078:  MOVFF  11,03
+007C:  MOVFF  0C,FE9
+0080:  MOVFF  07,FEA
+0084:  BSF    07.7
+0086:  MOVFF  08,FE1
+008A:  MOVFF  09,FE2
+008E:  MOVFF  0A,FD9
+0092:  MOVFF  0B,FDA
+0096:  MOVFF  12,FF3
+009A:  MOVFF  13,FF4
+009E:  MOVFF  14,FFA
+00A2:  MOVFF  15,FF5
+00A6:  MOVFF  16,FF6
+00AA:  MOVFF  17,FF7
+00AE:  MOVF   04,W
+00B0:  MOVFF  06,FE0
+00B4:  MOVFF  05,FD8
+00B8:  RETFIE 0
+.................... //*************************************************************************************************** 
+.................... //---------------------Programa de un AGV Electronica y Mecanica---------------- 
+.................... //-------------------------31 de Octubre del 2011------------------------------ 
+.................... //---------------Programacion: Andres Eduardo Sabas Jimenez-------------------- 
+.................... //-----------------Diseño:                                           ------------ 
+.................... //-----------------------Objetivo: Lograr un vehiculo no tripulado--------------  
+.................... //-----------------con opcion hibrida automatica y manual, con comunicacion bluethoot----------- 
+.................... //----------------------asi como poder soportar una pantalla touch-------------- 
+.................... //**************************************************************************************************** 
+.................... //#include <AGV.h> 
+.................... #include <18F4550.h> 
+.................... //////// Standard Header file for the PIC18F4550 device //////////////// 
+.................... #device PIC18F4550 
+.................... #list 
+....................  
+.................... #device adc=8 
+....................  
+.................... #FUSES NOWDT                    //No Watch Dog Timer 
+.................... #FUSES WDT128                   //Watch Dog Timer uses 1:128 Postscale 
+.................... #FUSES HS                       //High speed Osc (> 4mhz for PCM/PCH) (>10mhz for PCD) 
+.................... #FUSES NOPROTECT                //Code not protected from reading 
+.................... #FUSES NOBROWNOUT               //No brownout reset 
+.................... #FUSES BORV20                   //Brownout reset at 2.0V 
+.................... #FUSES PUT                      //Power Up Timer 
+.................... #FUSES NOCPD                    //No EE protection 
+.................... #FUSES STVREN                   //Stack full/underflow will cause reset 
+.................... #FUSES NODEBUG                  //No Debug mode for ICD 
+.................... #FUSES NOLVP                    //No low voltage prgming, B3(PIC16) or B5(PIC18) used for I/O 
+.................... #FUSES NOWRT                    //Program memory not write protected 
+.................... #FUSES NOWRTD                   //Data EEPROM not write protected 
+.................... #FUSES IESO                     //Internal External Switch Over mode enabled 
+.................... #FUSES FCMEN                    //Fail-safe clock monitor enabled 
+.................... #FUSES PBADEN                   //PORTB pins are configured as analog input channels on RESET 
+.................... #FUSES NOWRTC                   //configuration not registers write protected 
+.................... #FUSES NOWRTB                   //Boot block not write protected 
+.................... #FUSES NOEBTR                   //Memory not protected from table reads 
+.................... #FUSES NOEBTRB                  //Boot block not protected from table reads 
+.................... #FUSES NOCPB                    //No Boot Block code protection 
+.................... #FUSES MCLR                     //Master Clear pin enabled 
+.................... #FUSES LPT1OSC                  //Timer1 configured for low-power operation 
+.................... #FUSES NOXINST                  //Extended set extension and Indexed Addressing mode disabled (Legacy mode) 
+.................... #FUSES PLL12                    //Divide By 12(48MHz oscillator input) 
+.................... #FUSES CPUDIV4                  //System Clock by 4 
+.................... #FUSES USBDIV                   //USB clock source comes from PLL divide by 2 
+.................... #FUSES VREGEN                   //USB voltage regulator enabled 
+.................... #FUSES ICPRT                    //ICPRT enabled 
+....................  
+.................... #use delay(crystal=12000000,  clock=3000000) 
+*
+016A:  CLRF   FEA
+016C:  MOVLW  20
+016E:  MOVWF  FE9
+0170:  MOVF   FEF,W
+0172:  BZ    0182
+0174:  MOVLW  F8
+0176:  MOVWF  00
+0178:  DECFSZ 00,F
+017A:  BRA    0178
+017C:  BRA    017E
+017E:  DECFSZ FEF,F
+0180:  BRA    0174
+0182:  RETLW  00
+....................  
+....................  
+.................... //---------- Configuro el uso del puerto serial------- 
+.................... #use rs232(baud=19200, xmit=PIN_C6,rcv=PIN_C7,RESTART_WDT) 
+....................  
+.................... //-----------------Se le pide a picc que no mueva los TRIS de los puertos 
+.................... #use FAST_IO(A) 
+.................... #use FAST_IO(B) 
+.................... #use FAST_IO(C) 
+.................... #use FAST_IO(D) 
+.................... #use FAST_IO(E) 
+....................  
+.................... //----------------Seccionde definicion de bits utlizados------------------------ 
+.................... #bit LED=0xF82.0   //Direccion logica del led    
+....................  
+.................... //------------------------ Variables globales----------------------------------- 
+....................    long VAL_ADC; 
+....................    unsigned char cmd, blue; 
+....................    int a, com; 
+....................     
+.................... //****************************************************************************** 
+.................... //------------------------- Interrupciones-------------------------------------- 
+.................... //****************************************************************************** 
+.................... //------------------------Subrutina de encoder--------------------------------- 
+.................... #int_EXT 
+.................... void  EXT_isr(void)  
+.................... { 
+....................    a++; 
+*
+00BA:  INCF   1D,F
+.................... } 
+.................... //---------------------Interrupciondel rs232----------------------------------- 
+00BC:  BCF    FF2.1
+00BE:  GOTO   006C
+.................... #int_RDA 
+.................... void  RDA_isr(void)  
+.................... { 
+....................  if(com=0) 
+00C2:  CLRF   1E
+00C4:  MOVF   1E,F
+00C6:  BZ    00D4
+....................    { 
+....................    cmd=getc(); //Espera de instruccion manual o automatico 
+00C8:  CLRWDT
+00CA:  BTFSS  F9E.5
+00CC:  BRA    00C8
+00CE:  MOVFF  FAE,1B
+....................    } 
+....................   else 
+00D2:  BRA    00DE
+....................   { 
+....................    blue=getc(); //Comunicacion con el bluetooht 
+00D4:  CLRWDT
+00D6:  BTFSS  F9E.5
+00D8:  BRA    00D4
+00DA:  MOVFF  FAE,1C
+....................   } 
+....................   
+.................... } 
+.................... //****************************************************************************** 
+....................  
+.................... //-----------------Subrutina que enciende y me apaga un led--------------------- 
+00DE:  BCF    F9E.5
+00E0:  GOTO   006C
+.................... void FLASHEO(unsigned char TIE) 
+.................... { 
+....................    LED=1; 
+*
+0184:  BSF    F82.0
+....................    delay_ms(TIE); 
+0186:  MOVFF  1F,20
+018A:  RCALL  016A
+....................    LED=0; 
+018C:  BCF    F82.0
+....................    delay_ms(TIE); 
+018E:  MOVFF  1F,20
+0192:  RCALL  016A
+....................    LED=1; 
+0194:  BSF    F82.0
+....................    delay_ms(TIE); 
+0196:  MOVFF  1F,20
+019A:  RCALL  016A
+....................    LED=0; 
+019C:  BCF    F82.0
+....................    delay_ms(TIE); 
+019E:  MOVFF  1F,20
+01A2:  RCALL  016A
+....................   
+....................    return; 
+....................  
+.................... } 
+01A4:  GOTO   020C (RETURN)
+.................... //******************SUBRUTINAS DEL GIRO DEL MOTOR******************************** 
+.................... //----------Subrutina de Giro a la derecha--------- 
+.................... void DERECHA(void) 
+.................... { 
+....................  
+.................... } 
+....................  
+.................... //----------Subrutina de Giro a la Izquierda--------- 
+.................... void IZQUIERDA(void) 
+.................... { 
+....................  
+.................... } 
+.................... //***********************SUBRUTINAS DEL BRAZO********************************** 
+.................... //----------Subrutina de cierre de pinza--------- 
+.................... void CIERRE(void) 
+.................... { 
+....................  
+.................... } 
+.................... //----------Subrutina de levantamiento de la pinza--------- 
+.................... void ALTURA(void) 
+.................... { 
+....................  
+.................... } 
+....................  
+.................... //********************SUBRUTINAS MAESTRAS************************************** 
+.................... //***************************************************************************** 
+.................... //------------------Subrutina de modo manual 
+.................... void manual() 
+.................... { 
+....................    com=1; //Se a seleccionado el modo y ahora se enviaran comandos del bluethoot 
+*
+01CC:  MOVLW  01
+01CE:  MOVWF  1E
+....................   
+.................... } 
+01D0:  GOTO   0242 (RETURN)
+.................... //-----------------Subrutina de modo automatico 
+.................... void automatico() 
+.................... { 
+....................    com=1; //Se a seleccionado el modo y ahora se enviaran comandos del bluethoot 
+01D4:  MOVLW  01
+01D6:  MOVWF  1E
+.................... } 
+01D8:  GOTO   0242 (RETURN)
+.................... //---  Subrutina de configuracion---------- 
+.................... void INI_CPU(void) 
+.................... { 
+....................  
+....................    setup_adc_ports(NO_ANALOGS|VSS_VDD); 
+*
+0100:  MOVF   FC1,W
+0102:  ANDLW  C0
+0104:  IORLW  0F
+0106:  MOVWF  FC1
+....................    setup_adc(ADC_CLOCK_DIV_2); 
+0108:  BCF    FC0.0
+010A:  BCF    FC0.1
+010C:  BCF    FC0.2
+010E:  BCF    FC0.7
+0110:  BSF    FC2.0
+....................    setup_psp(PSP_DISABLED); 
+0112:  BCF    F96.4
+....................    setup_spi(SPI_SS_DISABLED); 
+0114:  BCF    FC6.5
+0116:  MOVLW  01
+0118:  MOVWF  FC6
+011A:  MOVLW  00
+011C:  MOVWF  FC7
+....................    setup_wdt(WDT_OFF); 
+011E:  BCF    FD1.0
+....................    setup_timer_0(RTCC_INTERNAL); 
+0120:  MOVLW  80
+0122:  MOVWF  FD5
+....................    setup_timer_1(T1_DISABLED); 
+0124:  CLRF   FCD
+....................    setup_timer_2(T2_DIV_BY_1,74,1); 
+0126:  MOVLW  00
+0128:  IORLW  04
+012A:  MOVWF  FCA
+012C:  MOVLW  4A
+012E:  MOVWF  FCB
+....................    //setup_ccp1(CCP_PWM_FULL_BRIDGE|CCP_SHUTDOWN_AC_L|CCP_SHUTDOWN_BD_L); 
+....................    setup_ccp1(CCP_PWM); 
+0130:  BCF    F8B.2
+0132:  MOVLW  0C
+0134:  MOVWF  FBD
+0136:  CLRF   FB7
+0138:  CLRF   FB6
+....................    setup_ccp2(CCP_PWM); 
+013A:  BCF    F8B.1
+013C:  MOVWF  FBA
+....................    set_pwm1_duty(0);// Motor derecho 
+013E:  CLRF   FBE
+....................    set_pwm2_duty(0);// Motor Izquierdo 
+0140:  CLRF   FBB
+....................    setup_comparator(NC_NC_NC_NC); 
+0142:  MOVLW  07
+0144:  MOVWF  FB4
+0146:  MOVF   F92,W
+0148:  MOVWF  F92
+014A:  MOVLW  02
+014C:  MOVWF  00
+014E:  DECFSZ 00,F
+0150:  BRA    014E
+0152:  MOVF   FB4,W
+0154:  BCF    FA1.6
+....................    set_tris_A(0B11111001); //Se configura el puerto para que RA1 y RA2 Salida 
+0156:  MOVLW  F9
+0158:  MOVWF  F92
+....................    SET_TRIS_B(0XFF); //El puerto B es entrada para el teclado matricial 
+015A:  MOVLW  FF
+015C:  MOVWF  F93
+....................    SET_TRIS_C(0X00); 
+015E:  MOVLW  00
+0160:  MOVWF  F94
+....................    SET_TRIS_D(0X00); 
+0162:  MOVWF  F95
+....................    SET_TRIS_E(0x00); //Se configuran las direcciobnes de los buses 
+0164:  MOVWF  F96
+....................     
+....................     
+....................    return; 
+....................  
+.................... } 
+0166:  GOTO   0206 (RETURN)
+....................  
+.................... //-------------Programa Principal------------------------ 
+.................... void main() 
+.................... { 
+*
+01DC:  CLRF   FF8
+01DE:  BCF    FD0.7
+01E0:  BSF    07.7
+01E2:  CLRF   FEA
+01E4:  CLRF   FE9
+01E6:  BSF    FB8.3
+01E8:  MOVLW  26
+01EA:  MOVWF  FAF
+01EC:  MOVLW  00
+01EE:  MOVWF  FB0
+01F0:  MOVLW  A6
+01F2:  MOVWF  FAC
+01F4:  MOVLW  90
+01F6:  MOVWF  FAB
+01F8:  MOVF   FC1,W
+01FA:  ANDLW  C0
+01FC:  IORLW  0F
+01FE:  MOVWF  FC1
+0200:  MOVLW  07
+0202:  MOVWF  FB4
+....................  
+....................        
+....................       INI_CPU(); 
+0204:  BRA    0100
+....................       FLASHEO(100); 
+0206:  MOVLW  64
+0208:  MOVWF  1F
+020A:  BRA    0184
+....................        
+....................       while(1) 
+....................       { 
+....................       
+....................          //Eleccion del modo de trabajo 
+....................          if(cmd!=0) 
+020C:  MOVF   1B,F
+020E:  BZ    0244
+....................          { 
+....................             switch (cmd) { 
+0210:  MOVF   1B,W
+0212:  BZ    021A
+0214:  XORLW  01
+0216:  BZ    0228
+0218:  BRA    0236
+....................  
+....................             case 0:printf("Manual"); 
+021A:  MOVLW  E4
+021C:  MOVWF  FF6
+021E:  MOVLW  00
+0220:  MOVWF  FF7
+0222:  RCALL  01A8
+....................             manual(); 
+0224:  BRA    01CC
+....................  
+....................             break; 
+0226:  BRA    0242
+....................  
+....................             case 1:printf("Automatico"); 
+0228:  MOVLW  EC
+022A:  MOVWF  FF6
+022C:  MOVLW  00
+022E:  MOVWF  FF7
+0230:  RCALL  01A8
+....................             automatico(); 
+0232:  BRA    01D4
+....................  
+....................            break; 
+0234:  BRA    0242
+....................  
+....................            default:printf("Bad cmd"); 
+0236:  MOVLW  F8
+0238:  MOVWF  FF6
+023A:  MOVLW  00
+023C:  MOVWF  FF7
+023E:  RCALL  01A8
+....................  
+....................            break; } 
+0240:  BRA    0242
+....................       } 
+....................       else 
+0242:  BRA    0244
+....................       { 
+....................        
+....................       } 
+....................  
+....................       } 
+0244:  BRA    020C
+.................... } 
+0246:  SLEEP 
+
+Configuration Fuses:
+   Word  1: CC3A   IESO FCMEN HS PLL3 CPUDIV4 USBDIV
+   Word  2: 0E38   NOBROWNOUT WDT128 NOWDT BORV20 PUT VREGEN
+   Word  3: 8700   PBADEN CCP2C1 MCLR LPT1OSC
+   Word  4: 00A1   STVREN NODEBUG NOLVP NOXINST ICPRT
+   Word  5: C00F   NOPROTECT NOCPD NOCPB
+   Word  6: E00F   NOWRT NOWRTD NOWRTC NOWRTB
+   Word  7: 400F   NOEBTR NOEBTRB
